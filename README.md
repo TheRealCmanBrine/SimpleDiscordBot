@@ -1,4 +1,4 @@
-# SimpleDiscordBot - A DiscordJS bot made for educational purposes.
+# SimpleDB - A DiscordJS Bot
 ---------------------------------------------------------------
 Requirements
 ---------------------------------------------------------------
@@ -9,4 +9,4 @@ Requirements
 5. QS. After Installing Node, Navigate To Your Workspace an run the command "npm install qs"
 6. FS. After Installing Node, Navigate To Your Workspace an run the command "npm install fs"
 ---------------------------------------------------------------
-To Setup Your Workspace, Just Download The Repository And Extract It, Then Navigate To It In A CMD Prompt
+To Setup Your Workspace, Just Download The Repository And Extract It, Then Navigate To It In a CMD Prompt
