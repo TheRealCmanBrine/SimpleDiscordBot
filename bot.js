@@ -9,7 +9,8 @@ const request = require("request");
 const cheerio = require("cheerio");
 const QueryString = require(`qs`);
 const fs = require('fs');
-
+var util = require('util');
+const { strict } = require('assert');
 
 client.on('ready', () => {
   console.clear
@@ -19,28 +20,23 @@ client.on('ready', () => {
   });
 });
 
-
-
 client.on('message', message => {
   if (message.content.includes('😏')) {
     message.react('😏')
   }
 })
 
-
-
 client.on('message', message => {
   if (!message.content.startsWith(prefix) || message.author.bot) return;
   const args = message.content.slice(prefix.length).trim().split(' ');
   const command = args.shift().toLowerCase();
-
-
+  console.log(message.author.tag + ' called the ' + command + ' command')
 
   if (command === 'help' || command === 'info' || command === 'commands' || command === 'halp') {
     const Embed = new MessageEmbed()
       .setColor(randomembedcolor())
       .setTitle('Bot Commands')
-      .setDescription('```' + prefix + 'mcskin <username> <head/face/body>```\n```' + prefix + 'penis <@user>```\n```' + prefix + 'pfp <@username>```\n```' + prefix + 'poll <content> <option1> <option2>```\n```' + prefix + 'randomsentence```\n```' + prefix + 'randomimg```\n```' + prefix + 'randomnumber <length>```\n```' + prefix + 'invitebot```\n```' + prefix + 'rate <@username>```')
+      .setDescription('```' + prefix + 'mcskin <username> <head/face/body>```\n```' + prefix + 'penis <@user>```\n```' + prefix + 'pfp <@username>```\n```' + prefix + 'poll <content> <option1> <option2>```\n```' + prefix + 'randomsentence```\n```' + prefix + 'randomimg```\n```' + prefix + 'randomnumber <length>```\n```' + prefix + 'invitebot```\n```' + prefix + 'rate <@username>```\n```' + prefix + 'retard <@username>```\n```' + prefix +'askgod <question>```\n```' + prefix + 'github```')
     message.channel.send(Embed)
   }
   else if (command === 'mcskin' || command === 'mincraftskin' || command === 'mcavatar' || command === 'skin') {
@@ -214,7 +210,7 @@ client.on('message', message => {
       const Embed = new MessageEmbed()
         .setColor('#ff0000')
         .setTitle('Incorrect Usage!')
-        .setDescription('Usage: ' + prefix + command + ' <content> <option1> <option2>')
+        .setDescription('Usage: ' + prefix + command + ' <content> <options>')
       message.channel.send(Embed)
     }
     else {
@@ -222,7 +218,7 @@ client.on('message', message => {
 
       const embed = new MessageEmbed()
         .setColor(randomembedcolor())
-        .setDescription('▬▬▬▬▬▬▬▬▬**«    Poll    »**▬▬▬▬▬▬▬▬▬\n' + message.content.slice(command.length += 1) + '\n▬▬▬▬▬▬▬**«    @everyone    »**▬▬▬▬▬▬▬▬ ')
+        .setDescription('▬▬▬**«  Poll  »**▬▬▬\n' + message.content.slice(command.length += 1) + '\n▬▬▬**«  @everyone  »**▬▬▬ ')
         .setFooter(message.author.username, client.user.avatarURL)
       message.channel.send(embed).then(sentEmbed => {
         sentEmbed.react("👍")
@@ -311,6 +307,58 @@ client.on('message', message => {
       }
     }
   }
+  else if (command === 'ret' || command === 'retard') {
+    if (!args.length) {
+      var ret = makeid(2)
+      const Embed = new MessageEmbed()
+        .setColor(randomembedcolor())
+        .setTitle(message.author.username + `'s retardation`)
+        .setDescription(`${message.author.username} is ${ret}% retarded. \n (${(100 - ret.toString)})`)
+      message.channel.send(Embed)
+    }
+    else {
+      const user = getUserFromMention(args[0]);
+      if (!user) {
+        const Embed = new MessageEmbed()
+          .setColor('#ff0000')
+          .setTitle('Incorrect Usage!')
+          .setDescription('Usage: ' + prefix + command + ' <@username>')
+        message.channel.send(Embed)
+      }
+      else {
+        var ret = makeid(2)
+        const Embed = new MessageEmbed()
+          .setColor(randomembedcolor())
+          .setTitle(user.username + `'s retardation`)
+          .setDescription(`${user.username} is ${ret}% retarded. \n (${(100 - ret.toString)})`)
+        message.channel.send(Embed)
+      }
+    }
+  }
+  else if (command === 'askgod' || command === 'ask' || command === 'goschoice') {
+    if (!args.length) {
+      const Embed = new MessageEmbed()
+        .setColor('#ff0000')
+        .setTitle('Incorrect Usage!')
+        .setDescription('Usage: ' + prefix + command + ' <a question>')
+      message.channel.send(Embed)
+    }
+    else {
+      const Embed = new MessageEmbed()
+      .setColor(randomembedcolor())
+      .setTitle('God\'s Choice')
+      .setDescription(askgod())
+    message.channel.send(Embed)
+    }
+  }
+  else if (command === 'github' || command === 'dev' || command === 'botcode') {
+    const Embed = new MessageEmbed()
+    .setColor(randomembedcolor())
+    .setTitle('My Code & Development!')
+    .setURL('https://github.com/TheRealCmanBrine/SimpleDiscordBot')
+    .setDescription('Click the link above to see my github page.')
+    message.channel.send(Embed)
+  }
   else if (command === '_______') {
     ////////////////////////////////
     if (!args.length) {
@@ -326,6 +374,97 @@ client.on('message', message => {
       ////////////////////////////////
     }
   }
+  else if (command === '_______') {
+    ////////////////////////////////
+    if (!args.length) {
+      const Embed = new MessageEmbed()
+        .setColor('#ff0000')
+        .setTitle('Incorrect Usage!')
+        .setDescription('Usage: ' + prefix + command + ' <> <> <>')
+      message.channel.send(Embed)
+    }
+    else {
+      ////////////////////////////////
+      message.channel.send(`${args[0]} ${args[1]} ${args[2]}`)
+      ////////////////////////////////
+    }
+  }
+  else if (command === '_______') {
+    ////////////////////////////////
+    if (!args.length) {
+      const Embed = new MessageEmbed()
+        .setColor('#ff0000')
+        .setTitle('Incorrect Usage!')
+        .setDescription('Usage: ' + prefix + command + ' <> <> <>')
+      message.channel.send(Embed)
+    }
+    else {
+      ////////////////////////////////
+      message.channel.send(`${args[0]} ${args[1]} ${args[2]}`)
+      ////////////////////////////////
+    }
+  }
+  else if (command === '_______') {
+    ////////////////////////////////
+    if (!args.length) {
+      const Embed = new MessageEmbed()
+        .setColor('#ff0000')
+        .setTitle('Incorrect Usage!')
+        .setDescription('Usage: ' + prefix + command + ' <> <> <>')
+      message.channel.send(Embed)
+    }
+    else {
+      ////////////////////////////////
+      message.channel.send(`${args[0]} ${args[1]} ${args[2]}`)
+      ////////////////////////////////
+    }
+  }
+  else if (command === '_______') {
+    ////////////////////////////////
+    if (!args.length) {
+      const Embed = new MessageEmbed()
+        .setColor('#ff0000')
+        .setTitle('Incorrect Usage!')
+        .setDescription('Usage: ' + prefix + command + ' <> <> <>')
+      message.channel.send(Embed)
+    }
+    else {
+      ////////////////////////////////
+      message.channel.send(`${args[0]} ${args[1]} ${args[2]}`)
+      ////////////////////////////////
+    }
+  }
+  else if (command === '_______') {
+    ////////////////////////////////
+    if (!args.length) {
+      const Embed = new MessageEmbed()
+        .setColor('#ff0000')
+        .setTitle('Incorrect Usage!')
+        .setDescription('Usage: ' + prefix + command + ' <> <> <>')
+      message.channel.send(Embed)
+    }
+    else {
+      ////////////////////////////////
+      message.channel.send(`${args[0]} ${args[1]} ${args[2]}`)
+      ////////////////////////////////
+    }
+  }
+  else if (command === '_______') {
+    ////////////////////////////////
+    if (!args.length) {
+      const Embed = new MessageEmbed()
+        .setColor('#ff0000')
+        .setTitle('Incorrect Usage!')
+        .setDescription('Usage: ' + prefix + command + ' <> <> <>')
+      message.channel.send(Embed)
+    }
+    else {
+      ////////////////////////////////
+      message.channel.send(`${args[0]} ${args[1]} ${args[2]}`)
+      ////////////////////////////////
+    }
+  }
+
 
 })
 
@@ -343,8 +482,6 @@ function getUserFromMention(mention) {
     return client.users.cache.get(mention);
   }
 }
-
-
 
 function randomembedcolor() {
   var embedcolors = [
@@ -387,6 +524,29 @@ function randomembedcolor() {
   return `0x` + randomcolor
 }
 
+function askgod() {
+  var god = [
+    "**no.**",
+    "**to fuck off.**",
+    "**not even he knows.**",
+    "**you're pretty dumb.**",
+    "**hell nah.**",
+    "**fuck yeah.**",
+    "**it's up to you.**",
+    "**to stop asking.**",
+    "**\"did I ask?\".**",
+    "**definitely.**",
+    "**for sure.**",
+    "**definitely not.**",
+    "**flip a coin dumbass.**",
+    "**to shut the fuck up.**",
+    "**yea.**",
+    "**potentially.**",
+  ]
+  var godschoice = god[Math.floor(Math.random() * god.length)];
+  return `god says ` + godschoice
+}
+
 function makeid(length) {
   var result = '';
   var characters = '123456789';
@@ -396,8 +556,6 @@ function makeid(length) {
   }
   return result;
 }
-
-
 
 function isNumeric(num) {
   if (!isNaN(num)) {
