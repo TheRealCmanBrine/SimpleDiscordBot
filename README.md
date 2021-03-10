@@ -10,3 +10,19 @@ Requirements
 6. FS. After Installing Node, Navigate To Your Workspace an run the command "npm install fs"
 ---------------------------------------------------------------
 To Setup Your Workspace, Just Download The Repository And Extract It, Then Navigate To It In a CMD Prompt
+
+Commands
+---------------------------------------------------------------
+  mcskin <username> <head/face/body>
+  penis <@user>
+  coinflip
+  pfp <@username>
+  poll <content> <option1> <option2>
+  randomsentence
+  randomimg
+  randomnumber <length>
+  invitebot
+  rate <@username>
+  retard <@username>
+  askgod <question>
+  github
