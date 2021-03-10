@@ -36,7 +36,7 @@ client.on('message', message => {
     const Embed = new MessageEmbed()
       .setColor(randomembedcolor())
       .setTitle('Bot Commands')
-      .setDescription('```' + prefix + 'mcskin <username> <head/face/body>```\n```' + prefix + 'penis <@user>```\n```' + prefix + 'pfp <@username>```\n```' + prefix + 'poll <content> <option1> <option2>```\n```' + prefix + 'randomsentence```\n```' + prefix + 'randomimg```\n```' + prefix + 'randomnumber <length>```\n```' + prefix + 'invitebot```\n```' + prefix + 'rate <@username>```\n```' + prefix + 'retard <@username>```\n```' + prefix +'askgod <question>```\n```' + prefix + 'github```')
+      .setDescription('```' + prefix + 'mcskin <username> <head/face/body>```\n```' + prefix + 'penis <@user>```\n```' + prefix + 'coinflip```\n```' + prefix + 'pfp <@username>```\n```' + prefix + 'poll <content> <option1> <option2>```\n```' + prefix + 'randomsentence```\n```' + prefix + 'randomimg```\n```' + prefix + 'randomnumber <length>```\n```' + prefix + 'invitebot```\n```' + prefix + 'rate <@username>```\n```' + prefix + 'retard <@username>```\n```' + prefix +'askgod <question>```\n```' + prefix + 'github```')
     message.channel.send(Embed)
   }
   else if (command === 'mcskin' || command === 'mincraftskin' || command === 'mcavatar' || command === 'skin') {
@@ -359,20 +359,12 @@ client.on('message', message => {
     .setDescription('Click the link above to see my github page.')
     message.channel.send(Embed)
   }
-  else if (command === '_______') {
-    ////////////////////////////////
-    if (!args.length) {
-      const Embed = new MessageEmbed()
-        .setColor('#ff0000')
-        .setTitle('Incorrect Usage!')
-        .setDescription('Usage: ' + prefix + command + ' <> <> <>')
-      message.channel.send(Embed)
-    }
-    else {
-      ////////////////////////////////
-      message.channel.send(`${args[0]} ${args[1]} ${args[2]}`)
-      ////////////////////////////////
-    }
+  else if (command === 'coinflip' || command === 'flip' || command === 'coin') {
+    const Embed = new MessageEmbed()
+    .setColor(randomembedcolor())
+    .setTitle('Coin Flip!')
+    .setImage(coinflip())
+    message.channel.send(Embed)
   }
   else if (command === '_______') {
     ////////////////////////////////
@@ -419,56 +411,7 @@ client.on('message', message => {
       ////////////////////////////////
     }
   }
-  else if (command === '_______') {
-    ////////////////////////////////
-    if (!args.length) {
-      const Embed = new MessageEmbed()
-        .setColor('#ff0000')
-        .setTitle('Incorrect Usage!')
-        .setDescription('Usage: ' + prefix + command + ' <> <> <>')
-      message.channel.send(Embed)
-    }
-    else {
-      ////////////////////////////////
-      message.channel.send(`${args[0]} ${args[1]} ${args[2]}`)
-      ////////////////////////////////
-    }
-  }
-  else if (command === '_______') {
-    ////////////////////////////////
-    if (!args.length) {
-      const Embed = new MessageEmbed()
-        .setColor('#ff0000')
-        .setTitle('Incorrect Usage!')
-        .setDescription('Usage: ' + prefix + command + ' <> <> <>')
-      message.channel.send(Embed)
-    }
-    else {
-      ////////////////////////////////
-      message.channel.send(`${args[0]} ${args[1]} ${args[2]}`)
-      ////////////////////////////////
-    }
-  }
-  else if (command === '_______') {
-    ////////////////////////////////
-    if (!args.length) {
-      const Embed = new MessageEmbed()
-        .setColor('#ff0000')
-        .setTitle('Incorrect Usage!')
-        .setDescription('Usage: ' + prefix + command + ' <> <> <>')
-      message.channel.send(Embed)
-    }
-    else {
-      ////////////////////////////////
-      message.channel.send(`${args[0]} ${args[1]} ${args[2]}`)
-      ////////////////////////////////
-    }
-  }
-
-
 })
-
-
 function getUserFromMention(mention) {
   if (!mention) return;
 
@@ -482,7 +425,6 @@ function getUserFromMention(mention) {
     return client.users.cache.get(mention);
   }
 }
-
 function randomembedcolor() {
   var embedcolors = [
     "ff0000",
@@ -523,7 +465,14 @@ function randomembedcolor() {
   var randomcolor = embedcolors[Math.floor(Math.random() * embedcolors.length)];
   return `0x` + randomcolor
 }
-
+function coinflip() {
+  var coins = [
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/2006_Quarter_Proof.png/780px-2006_Quarter_Proof.png",
+    "https://preview.redd.it/9w7f38pyp8211.png?width=765&auto=webp&s=e38a585c8ba5fd41f6378e3329a805a43df883da"
+  ]
+  var side = coins[Math.floor(Math.random() * coins.length)];
+  return side
+}
 function askgod() {
   var god = [
     "**no.**",
@@ -546,7 +495,6 @@ function askgod() {
   var godschoice = god[Math.floor(Math.random() * god.length)];
   return `god says ` + godschoice
 }
-
 function makeid(length) {
   var result = '';
   var characters = '123456789';
@@ -556,7 +504,6 @@ function makeid(length) {
   }
   return result;
 }
-
 function isNumeric(num) {
   if (!isNaN(num)) {
     return (num)
