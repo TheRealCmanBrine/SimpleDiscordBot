@@ -8,8 +8,9 @@ Requirements
 4. Cheerio. After Installing Node, Navigate To Your Workspace an run the command "npm install cheerio"
 5. QS. After Installing Node, Navigate To Your Workspace an run the command "npm install qs"
 6. FS. After Installing Node, Navigate To Your Workspace an run the command "npm install fs"
-To Setup Your Workspace, Just Download The Repository And Extract It, Then Navigate To It In a CMD Prompt
-(cherrio and request for random image and sentence apis)
+
+ To Setup Your Workspace, Just Download The Repository And Extract It, Then Navigate To It In a CMD Prompt
+ (cherrio and request for random image and sentence apis)
 
 Commands
 ---------------------------------------------------------------
