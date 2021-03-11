@@ -25,13 +25,14 @@ client.on('message', message => {
     message.react('😏')
   }
 })
-
 client.on('message', message => {
   if (!message.content.startsWith(prefix) || message.author.bot) return;
   const args = message.content.slice(prefix.length).trim().split(' ');
   const command = args.shift().toLowerCase();
   console.log(message.author.tag + ' called the ' + command + ' command')
-
+  if (message.content.startsWith('$')) {
+    message.react('👀')
+  }
   if (command === 'help' || command === 'info' || command === 'commands' || command === 'halp') {
     const Embed = new MessageEmbed()
       .setColor(randomembedcolor())
@@ -313,7 +314,7 @@ client.on('message', message => {
       const Embed = new MessageEmbed()
         .setColor(randomembedcolor())
         .setTitle(message.author.username + `'s retardation`)
-        .setDescription(`${message.author.username} is ${ret}% retarded. \n (${(100 - ret.toString)})`)
+        .setDescription(`${message.author.username} is ${ret}% retarded.`)
       message.channel.send(Embed)
     }
     else {
@@ -366,37 +367,23 @@ client.on('message', message => {
     .setImage(coinflip())
     message.channel.send(Embed)
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   else if (command === 'match' || command === 'lovefind' || command === 'findlover') {
-    const randomPer = message.guild.members.cache.random().user;
+    let randomPer = message.guild.members.cache.random().user;
     if (!args.length) {
+      if (message.author === randomPer) {
+        const Embed = new MessageEmbed()
+        .setColor(randomembedcolor())
+        .setTitle('Successful Match Found!')
+        .setDescription(`**${message.author}** and... ||**Themselves??!** :grimacing:||`)
+        message.channel.send(Embed)
+        } else {
       const Embed = new MessageEmbed()
         .setColor(randomembedcolor())
         .setTitle('Successful Match Found!')
-        .setDescription(`**${message.author.username}** and... ||**${randomPer.username}** :heart_eyes:||`)
+        .setDescription(`**${message.author}** and... ||**${randomPer}** :heart_eyes:|| \n Couple match percentage: ${makeid(2)}%`)
       message.channel.send(Embed)
     }
-    else {
+  } else {
       const user = getUserFromMention(args[0]);
       if (!user) {
         const Embed = new MessageEmbed()
@@ -406,59 +393,20 @@ client.on('message', message => {
         message.channel.send(Embed)
       }
       else {
+        if (user === randomPer) {
         const Embed = new MessageEmbed()
         .setColor(randomembedcolor())
         .setTitle('Successful Match Found!')
-        .setDescription(`**${user.username}** and... ||**${randomPer.username}** :heart_eyes:||`)
-      message.channel.send(Embed)
+        .setDescription(`**${user}** and... ||**Themselves??!** :grimacing:||`)
+        message.channel.send(Embed)
+        } else {
+        const Embed = new MessageEmbed()
+        .setColor(randomembedcolor())
+        .setTitle('Successful Match Found!')
+        .setDescription(`**${user}** and... ||**${randomPer}** :heart_eyes:|| \n Couple match percentage: ${makeid(2)}%`)
+        message.channel.send(Embed)
+        }
       }
-    }
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  else if (command === '_______') {
-    ////////////////////////////////
-    if (!args.length) {
-      const Embed = new MessageEmbed()
-        .setColor('#ff0000')
-        .setTitle('Incorrect Usage!')
-        .setDescription('Usage: ' + prefix + command + ' <> <> <>')
-      message.channel.send(Embed)
-    }
-    else {
-      ////////////////////////////////
-      message.channel.send(`${args[0]} ${args[1]} ${args[2]}`)
-      ////////////////////////////////
     }
   }
   else if (command === '_______') {
