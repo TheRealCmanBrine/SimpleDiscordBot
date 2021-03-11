@@ -11,19 +11,3 @@ Requirements
 
  To Setup Your Workspace, Just Download The Repository And Extract It, Then Navigate To It In a CMD Prompt
  (cherrio and request for random image and sentence apis)
-
-Commands
----------------------------------------------------------------
-  mcskin <username> <head/face/body> || 
-  penis <@user> || 
-  coinflip || 
-  pfp <@username> || 
-  poll <content> <option1> <option2> || 
-  randomsentence || 
-  randomimg || 
-  randomnumber <length> || 
-  invitebot || 
-  rate <@username> || 
-  retard <@username> || 
-  askgod <question> || 
-  github || 
