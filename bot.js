@@ -36,7 +36,7 @@ client.on('message', message => {
     const Embed = new MessageEmbed()
       .setColor(randomembedcolor())
       .setTitle('Bot Commands')
-      .setDescription('```' + prefix + 'mcskin <username> <head/face/body>```\n```' + prefix + 'penis <@user>```\n```' + prefix + 'coinflip```\n```' + prefix + 'pfp <@username>```\n```' + prefix + 'poll <content> <option1> <option2>```\n```' + prefix + 'randomsentence```\n```' + prefix + 'randomimg```\n```' + prefix + 'randomnumber <length>```\n```' + prefix + 'invitebot```\n```' + prefix + 'rate <@username>```\n```' + prefix + 'retard <@username>```\n```' + prefix +'askgod <question>```\n```' + prefix + 'github```')
+      .setDescription('**' + prefix + 'mcskin <username> <head/face/body>\n' + prefix + 'penis <@user>\n' + prefix + 'coinflip\n' + prefix + 'pfp <@username>\n' + prefix + 'poll <content> <option1> <option2>\n' + prefix + 'randomsentence\n' + prefix + 'randomimg\n' + prefix + 'randomnumber <length>\n' + prefix + 'invitebot\n' + prefix + 'match <@username>\n' + prefix + 'rate <@username>\n' + prefix + 'retard <@username>\n' + prefix +'askgod <question>\n' + prefix + 'github**')
     message.channel.send(Embed)
   }
   else if (command === 'mcskin' || command === 'mincraftskin' || command === 'mcavatar' || command === 'skin') {
@@ -366,21 +366,86 @@ client.on('message', message => {
     .setImage(coinflip())
     message.channel.send(Embed)
   }
-  else if (command === '_______') {
-    ////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  else if (command === 'match' || command === 'lovefind' || command === 'findlover') {
+    const randomPer = message.guild.members.cache.random().user;
     if (!args.length) {
       const Embed = new MessageEmbed()
-        .setColor('#ff0000')
-        .setTitle('Incorrect Usage!')
-        .setDescription('Usage: ' + prefix + command + ' <> <> <>')
+        .setColor(randomembedcolor())
+        .setTitle('Successful Match Found!')
+        .setDescription(`**${message.author.username}** and... ||**${randomPer.username}** :heart_eyes:||`)
       message.channel.send(Embed)
     }
     else {
-      ////////////////////////////////
-      message.channel.send(`${args[0]} ${args[1]} ${args[2]}`)
-      ////////////////////////////////
+      const user = getUserFromMention(args[0]);
+      if (!user) {
+        const Embed = new MessageEmbed()
+          .setColor('#ff0000')
+          .setTitle('Incorrect Usage!')
+          .setDescription('You didn\'t mention a user!')
+        message.channel.send(Embed)
+      }
+      else {
+        const Embed = new MessageEmbed()
+        .setColor(randomembedcolor())
+        .setTitle('Successful Match Found!')
+        .setDescription(`**${user.username}** and... ||**${randomPer.username}** :heart_eyes:||`)
+      message.channel.send(Embed)
+      }
     }
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   else if (command === '_______') {
     ////////////////////////////////
     if (!args.length) {
